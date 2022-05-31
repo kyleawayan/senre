@@ -1,7 +1,7 @@
 import * as variables from "./variables";
 
-const authCallback = () => {
+const handleCallback = () => {
   return `yes. client id: ${variables.client_id}`;
 };
 
-export { authCallback };
+export { handleCallback };

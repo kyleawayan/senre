@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { authCallback } from "../services/spotifyAuth/getToken";
+import { handleCallback } from "../services/spotifyAuth/getToken";
 
 const spotifyAuthCallback = (req: Request, res: Response) => {
-  const someVariable = authCallback();
+  const someVariable = handleCallback();
   res.send(someVariable);
 };
 
