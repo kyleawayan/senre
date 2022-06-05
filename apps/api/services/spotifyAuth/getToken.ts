@@ -1,7 +1,30 @@
 import * as variables from "./variables";
+import axios from "axios";
 
-const handleCallback = () => {
-  return `yes. client id: ${variables.client_id}`;
+/**
+ * Exchange code from callback for a real access token.
+ * DON'T FORGET TO VALIDATE THE STATE FIRST!
+ * @param callbackCode Code from the callback
+ * @returns The user's access token
+ **/
+const exchangeCodeForAccess = async (callbackCode: string): Promise<string> => {
+  const params = {
+    grant_type: "authorization_code",
+    code: callbackCode,
+    redirect_uri: variables.redirect_uri,
+  };
+  const config = {
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+  };
+
+  const res = await axios.postForm(
+    "https://accounts.spotify.com/api/token",
+    params,
+    config
+  );
+
+  console.log(res);
+  return Promise.resolve("i am token");
 };
 
-export { handleCallback };
+export { exchangeCodeForAccess };
