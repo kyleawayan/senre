@@ -17,14 +17,18 @@ const exchangeCodeForAccess = async (callbackCode: string): Promise<string> => {
     headers: { "content-type": "application/x-www-form-urlencoded" },
   };
 
-  const res = await axios.postForm(
-    "https://accounts.spotify.com/api/token",
-    params,
-    config
-  );
+  try {
+    const res = await axios.postForm(
+      "https://accounts.spotify.com/api/token",
+      params,
+      config
+    );
 
-  console.log(res);
-  return Promise.resolve("i am token");
+    console.log(res);
+    return Promise.resolve("i am token");
+  } catch {
+    return Promise.reject("Error in requesting Spotify for access token");
+  }
 };
 
 export { exchangeCodeForAccess };

@@ -27,8 +27,14 @@ const spotifyAuthCallback = (req: Request, res: Response) => {
     return;
   }
 
-  const token = exchangeCodeForAccess(callbackCode);
-  res.send(token);
+  // TODO: Check the state when not in development mode
+
+  exchangeCodeForAccess(callbackCode)
+    .then((token) => res.send(token))
+    .catch((err) => {
+      res.status(500);
+      res.json({ error: err });
+    });
 };
 
 export { spotifyAuthCallback };
