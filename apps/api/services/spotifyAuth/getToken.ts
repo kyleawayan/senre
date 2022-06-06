@@ -24,9 +24,9 @@ const exchangeCodeForAccess = async (callbackCode: string): Promise<string> => {
       config
     );
 
-    console.log(res);
     return Promise.resolve("i am token");
-  } catch {
+  } catch (err) {
+    console.error(err);
     return Promise.reject("Error in requesting Spotify for access token");
   }
 };
